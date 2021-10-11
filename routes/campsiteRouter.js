@@ -1,9 +1,9 @@
 const express = require('express');
-const { set } = require('mongoose');
 const Campsite = require('../models/campsite');
 
 const campsiteRouter = express.Router();
 
+// Root
 campsiteRouter.route('/')
 .get((req, res, next) => {
     Campsite.find()
@@ -38,6 +38,7 @@ campsiteRouter.route('/')
     .catch(err => next(err));
 });
 
+// campsiteId
 campsiteRouter.route('/:campsiteId')
 .get((req, res, next) => {
     Campsite.findById(req.params.campsiteId)
@@ -73,6 +74,7 @@ campsiteRouter.route('/:campsiteId')
     .catch(err => next(err));
 });
 
+// comments
 campsiteRouter.route('/:campsiteId/comments')
 .get((req, res, next) => {
     Campsite.findById(req.params.campsiteId)
@@ -88,7 +90,7 @@ campsiteRouter.route('/:campsiteId/comments')
         }
     })
     .catch(err => next(err));
-}) // I paused here ...
+}) // I paused here ... (I don't know when I typed this -- Saturday? It's Monday, 10/11, today.)
 .post((req, res, next) => {
     Campsite.create(req.body)
     .then(campsite => {
