@@ -73,4 +73,44 @@ campsiteRouter.route('/:campsiteId')
     .catch(err => next(err));
 });
 
+campsiteRouter.route('/:campsiteId/comments')
+.get((req, res, next) => {
+    Campsite.findById(req.params.campsiteId)
+    .then(campsite => {
+        if (campsite) {
+            res.statusCode = 200;
+            res.setHeader('Content-Type', 'application/json');
+            res.json(campsite.comments);
+        } else {
+            err = new Error(`Campsite ${req.params.campsiteId} not found`);
+            err.statusCode = 404;
+            return next(err);
+        }
+    })
+    .catch(err => next(err));
+}) // I paused here ...
+.post((req, res, next) => {
+    Campsite.create(req.body)
+    .then(campsite => {
+        console.log('Campsite Created ', campsite);
+        res.setStatusCode = 200;
+        res.setHeader('Content-Type', 'application/json');
+        res.json(campsite);
+    })
+    .catch(err => next(err));
+})
+.put((req, res) => {
+    res.statusCode = 403;
+    res.end('PUT operation not supported on /campsites');
+})
+.delete((req, res, next) => {
+    Campsite.deleteMany()
+    .then(response => {
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'application/json');
+        res.json(response);
+    })
+    .catch(err => next(err));
+});
+
 module.exports = campsiteRouter;
