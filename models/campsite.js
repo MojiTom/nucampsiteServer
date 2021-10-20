@@ -16,12 +16,14 @@ const commentSchema = new Schema({
         required: true
     },
     author: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: Object,
         ref: 'User'
     }
 }, {
     timestamps: true
 });
+
+// mongoose.Schema.Types.ObjectId
 
 const campsiteSchema = new Schema({
     name: {
