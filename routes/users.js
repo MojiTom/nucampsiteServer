@@ -6,7 +6,7 @@ const cors = require('./cors');
 
 const router = express.Router();
 
-/* GET users list. */
+/* GET users list. This is /users ... */
 router.get('/', cors.corsWithOptions, authenticate.verifyUser, authenticate.verifyAdmin, function(req, res, next) {
     User.find()
     .then(users => {
